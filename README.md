@@ -1,4 +1,4 @@
-```markdown
+
 Proyecto: Demo TPI — PDFs inseguros vs variante aislada y POST
 
 Descripción corta
