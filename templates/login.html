@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar sesión — Pierre de Fermat Bank</title>
+    <style>
+      :root{ --primary: {{ '#b30000' if theme=='vulnerable' else ('#0b63ff' if theme=='secure' else '#0a8a2f') }} }
+      body{ font-family:Inter, Arial, sans-serif; background:#f5f6f7; margin:0 }
+      .box{ max-width:420px; margin:80px auto; background:#fff; padding:28px; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.06) }
+      h1{ margin:0 0 8px 0; color:var(--primary) }
+      .muted{ color:#666; margin-bottom:12px }
+      label{ display:block; margin:10px 0 }
+      input{ width:100%; padding:10px; border:1px solid #ddd; border-radius:6px }
+      .btn{ background:var(--primary); color:#fff; padding:10px 14px; border-radius:8px; border:0; cursor:pointer }
+      .note{ font-size:13px; color:#777; margin-top:12px }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <h1>Pierre de Fermat Bank</h1>
+      <div class="muted">Acceso de demostración</div>
+      <form method="post" action="{{ url_for('login') }}">
+        <label>Usuario
+          <input name="username" required>
+        </label>
+        <label>Password
+          <input name="password" type="password" required>
+        </label>
+        <div style="margin-top:12px"><button class="btn" type="submit">Entrar</button></div>
+      </form>
+      <div class="note">Credenciales de prueba: <strong>admin/admin</strong> (ver), <strong>attacker/attacker</strong> (subir/eliminar)</div>
+    </div>
+  </body>
+</html>

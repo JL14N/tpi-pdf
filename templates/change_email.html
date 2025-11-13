@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cambiar Email Admin</title>
+    <style>
+      :root{ --primary: {{ '#b30000' if theme=='vulnerable' else ('#0b63ff' if theme=='secure' else '#0a8a2f') }}; --muted:#666 }
+      body{ font-family:Inter, Arial, sans-serif; background:#f7f8f9; margin:0 }
+      .wrap{ max-width:720px; margin:40px auto; padding:18px }
+      .card{ background:#fff; padding:18px; border-radius:8px; box-shadow:0 8px 20px rgba(0,0,0,0.06) }
+      label{ display:block; margin-top:10px }
+      input{ width:100%; padding:10px; border:1px solid #ddd; border-radius:6px }
+      .btn{ background:var(--primary); color:#fff; padding:8px 12px; border-radius:6px; border:0; margin-top:12px }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h2>Cambiar Email Administrativo</h2>
+        <div class="muted">Email actual: <strong>{{ current }}</strong></div>
+        <form method="post" action="{{ url_for('admin_change_email') }}">
+          <label>Nuevo email:
+            <input name="email" type="email" required>
+          </label>
+          <button class="btn" type="submit">Cambiar</button>
+        </form>
+        <p style="margin-top:12px"><a href="{{ url_for('index') }}">Volver</a></p>
+      </div>
+    </div>
+  </body>
+</html>

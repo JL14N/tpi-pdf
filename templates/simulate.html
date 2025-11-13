@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simular alerta PDF</title>
+  </head>
+  <body>
+    <h1>Simulación segura de la alerta</h1>
+    <p>Esta página simula la ejecución del payload de PDF con un alert normal de navegador.</p>
+    <button id="run">Ejecutar simulación</button>
+
+    <script>
+      document.getElementById('run').addEventListener('click', function(){
+        alert('¡Vulnerabilidad XSS/Ejecución de Script Demostrada! (document.domain: ' + document.domain + ') - ¡Las credenciales han sido robadas!');
+      });
+    </script>
+  </body>
+  </html>

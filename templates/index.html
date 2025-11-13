@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+  <!doctype html>
+  <html lang="es">
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Pierre de Fermat Bank</title>
+      <style>
+        :root {
+          --primary: {{ '#b30000' if theme=='vulnerable' else ('#0b63ff' if theme=='secure' else '#0a8a2f') }};
+          --muted: #6b6b6b;
+          --bg: #f7f7f8;
+          --card-bg: #ffffff;
+          --accent: rgba(0,0,0,0.06);
+        }
+        body{ font-family: Inter, Roboto, Arial, sans-serif; background:var(--bg); margin:0; color:#222 }
+        header{ background:linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0)); border-bottom:1px solid rgba(0,0,0,0.06) }
+        .topbar{ max-width:1100px; margin:0 auto; padding:18px 20px; display:flex; align-items:center; justify-content:space-between }
+        .brand{ display:flex; align-items:center; gap:14px }
+        .brand h1{ margin:0; font-size:20px; color:var(--primary); letter-spacing:0.4px }
+        nav a{ color:var(--muted); margin-left:16px; text-decoration:none }
+        .container{ max-width:1100px; margin:24px auto; display:grid; grid-template-columns: 1fr 360px; gap:20px; padding:0 20px }
+        .card{ background:var(--card-bg); border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); padding:18px }
+        .headline{ color:#333; margin:0 0 12px 0 }
+        .muted{ color:var(--muted); font-size:14px }
+        .alerts{ margin-bottom:12px }
+        .alert{ padding:10px 12px; border-radius:6px; margin-bottom:8px }
+        .alert-success{ background: #e8f7ed; color:#0b6b2d }
+        .alert-danger{ background: #fdecea; color:#7a0b0b }
+        .viewer{ min-height:420px; display:flex; align-items:center; justify-content:center; border-radius:6px; background:var(--accent) }
+        .slots{ display:grid; grid-template-columns: repeat(1,1fr); gap:12px }
+        .slot{ background:linear-gradient(180deg, #fff, #fafafa); border:1px solid rgba(0,0,0,0.06); border-radius:8px; padding:8px; display:flex; gap:8px; align-items:center }
+        .thumb{ width:110px; height:150px; background:#fafafa; border-radius:4px; display:flex; align-items:center; justify-content:center; overflow:hidden }
+        .thumb embed{ width:100%; height:100% }
+        .slot-info{ flex:1 }
+        .slot-actions{ text-align:right }
+        .btn{ background:var(--primary); color:white; padding:8px 12px; border-radius:6px; border:0; cursor:pointer }
+        .btn.secondary{ background:#e9eef0; color:#333 }
+        footer{ max-width:1100px; margin:26px auto; color:var(--muted); font-size:13px }
+        @media (max-width:900px){ .container{ grid-template-columns: 1fr; } .slots{ grid-template-columns: repeat(2,1fr) } }
+      </style>
+    </head>
+    <body>
+      <header>
+        <div class="topbar">
+          <div class="brand">
+            <h1>Pierre de Fermat Bank</h1>
+            <div class="muted">Document Viewer</div>
+          </div>
+          <nav>
+            {% if not user %}
+              <a href="{{ url_for('login') }}">Iniciar sesión</a>
+            {% else %}
+              <span class="muted">{{ user }}{% if role %} — {{ role }}{% endif %}</span>
+              <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+              {% if role == 'attacker' %}
+                <a href="{{ url_for('manage') }}">Gestionar PDFs</a>
+              {% endif %}
+            {% endif %}
+          </nav>
+        </div>
+      </header>
+
+      <main class="container">
+        <div class="card">
+          <h3>Documentos</h3>
+          {% if role == 'admin' %}
+            <div style="margin-top:8px" class="muted">Correo admin: <strong>{{ admin_email }}</strong></div>
+          {% endif %}
+          <div class="grid">
+            {% if slots and slots | length > 0 %}
+              {% for f in slots %}
+                <div class="card small">
+                  <div style="height:160px;display:flex;align-items:center;justify-content:center">
+                    {% set basename = (f.rsplit('/',1)[-1] if f else '') %}
+                    {% set thumbname = 'thumbs/' + (basename.rsplit('.',1)[0] + '.png') if basename else None %}
+                    {% if thumbname and thumbname in thumbs_available %}
+                      <img src="{{ url_for('uploaded_file', filename=thumbname) }}" style="max-width:100%;max-height:100%;object-fit:contain" alt="Preview">
+                    {% else %}
+                      <div class="muted">Sin vista previa</div>
+                    {% endif %}
+                  </div>
+                  <div style="padding:10px">
+                    <div class="muted">{{ f if f else 'Sin archivo' }}</div>
+                    <div style="margin-top:8px">
+                      {% if f %}
+                        <a class="btn secondary" href="{{ url_for('uploaded_file', filename=f) }}" target="_blank">Descargar</a>
+                      {% endif %}
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              {% if filename %}
+                <div class="viewer">
+                  <img src="{{ url_for('uploaded_file', filename='thumbs/' ~ (filename | replace('.pdf', '.png'))) }}" alt="preview" style="width:100%; height:auto; max-height:420px; object-fit:contain">
+                </div>
+              {% else %}
+                <div class="viewer">
+                  <div style="text-align:center">
+                    <p class="muted">No hay PDF subido.</p>
+                    <p><a class="btn" href="{{ url_for('sample_risky') }}">Probar PDF Riesgoso</a>
+                    <a class="btn secondary" href="{{ url_for('sample_csrf_link') }}">PDF demo CSRF</a></p>
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+          </div>
+        </div>
+
+        {% if role != 'admin' %}
+        <!-- slots summary (compact) -->
+        <div class="card">
+          <h3>Slots</h3>
+          <div class="slots">
+            {% for s in slots %}
+              <div class="slot">
+                <div class="thumb">
+                  {% if s %}
+                    <img src="{{ url_for('uploaded_file', filename='thumbs/' ~ (s | replace('.pdf', '.png'))) }}" alt="thumb">
+                  {% else %}
+                    <div class="muted">Vacío</div>
+                  {% endif %}
+                </div>
+                <div class="slot-info">
+                  <div>{{ s if s else 'Sin archivo' }}</div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+      </main>
+
+      <footer>
+        Pierre de Fermat Bank — Demo educativa sobre seguridad de PDFs
+      </footer>
+    </body>
+  </html>
