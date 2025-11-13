@@ -23,7 +23,10 @@
     <div class="wrap">
       <div class="top">
         <h1>Gestión de PDFs</h1>
-        <div><a href="{{ url_for('logout') }}">Cerrar sesión</a></div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <a class="btn" href="{{ url_for('sample_csrf_link') }}" target="_blank" style="background:#e9eef0;color:#222;padding:8px 10px;border-radius:6px;text-decoration:none">Generar PDF demo</a>
+          <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+        </div>
       </div>
 
       <div class="card">

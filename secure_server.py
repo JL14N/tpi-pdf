@@ -7,7 +7,7 @@ from PyPDF2 import PdfReader
 from functools import wraps
 from PIL import Image, ImageDraw, ImageFont
 
-UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads_isolated')
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'uploads')
 STATE_FILE = os.path.join(os.path.dirname(__file__), 'admin_state.json')
 ALLOWED_EXTENSIONS = {'pdf'}
 
@@ -285,7 +285,7 @@ def sample_csrf_link():
     p = canvas.Canvas(buf)
     p.drawString(100, 750, 'Documento de prueba - Enlace CSRF (aislado)')
     p.drawString(100, 730, 'Haga clic en el enlace (GET) — en el servidor seguro esto no cambia el email.')
-    link = 'http://127.0.0.1:5001/admin/change-email?email=attacker%40evil.example'
+    link = 'http://127.0.0.1:5000/admin/change-email?email=attacker%40evil.example'
     p.drawString(100, 700, 'Click aquí:')
     p.linkURL(link, (160, 688, 460, 708), relative=0)
     p.drawString(160, 700, link)
@@ -333,4 +333,4 @@ def admin_change_email():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+    app.run(debug=True, port=5000)

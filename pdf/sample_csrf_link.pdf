@@ -13,7 +13,7 @@ endobj
 3 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (http://127.0.0.1:5001/admin/change-email?email=attacker%40evil.example)
+/S /URI /Type /Action /URI (http://127.0.0.1:5000/admin/change-email?email=attacker%40evil.example)
 >> /Border [ 0 0 0 ] /Rect [ 160 688 460 708 ] /Subtype /Link /Type /Annot
 >>
 endobj
@@ -34,7 +34,7 @@ endobj
 endobj
 6 0 obj
 <<
-/Author (anonymous) /CreationDate (D:20251113032245-03'00') /Creator (ReportLab PDF Library - www.reportlab.com) /Keywords () /ModDate (D:20251113032245-03'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
+/Author (anonymous) /CreationDate (D:20251113033306-03'00') /Creator (ReportLab PDF Library - www.reportlab.com) /Keywords () /ModDate (D:20251113033306-03'00') /Producer (ReportLab PDF Library - www.reportlab.com) 
   /Subject (unspecified) /Title (untitled) /Trapped /False
 >>
 endobj
@@ -45,10 +45,10 @@ endobj
 endobj
 8 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 309
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 307
 >>
 stream
-Gas2B:J8Sj&B4,:'^m4k6Bg4^0b=o4Rd._QmVso/c'ZL_ZS?re+5\@rkWre<1!I:U^QB)AjJ'WqpBpFc67,NIOD0qG4ekt,5F31e'EWP,TIb["B4f?CjA7T-@HK^]NO!?A0Xe/<46V3`Z),V-0SFb-])F:!F,kUARUFjhJ3.`9FU?L4A#XPUSL"#B1\,L".Q@."Sd,KAr=>HO+hMZ+\[Bqod6C<EAo9d"#l9q]-Hh92r&<O4__h$T*6TUgKJ-J=6HGNDgN9\\:fm776/O8?9@H;kaMV"-puEOV:U5Dl5<)bn!SmWg!<~>endstream
+Gas2Bc"b*\'SZ9F`Rts4?o"KKKn'H:Z!FlFdp4jjj/n?e,V`%\+2;58[#;@t3/bt(IO)jN18oB3UI)VUO>EhZa<XBN[`I!4prb<i$@tVqTH(sI[I,#9^;cblZlPKd.ItWEAuo?`RgIRNlMe8Kq(:T[%KpX.#$51oBJ;Bp&peUVSm#75gMVq\4L$hnND%==j@VeUiQ,-JhO2MkI7jSi`m;1F-IG$[`,3;9kWXVO>qo.(ljs*SRm25VA8s/5Mb"7(ZW%2BL\b*pWB0N*/6W3_P4tcugtj?/HXe<"+P0`pd=]goCr'o+~>endstream
 endobj
 xref
 0 9
@@ -64,7 +64,7 @@ xref
 trailer
 <<
 /ID 
-[<779b7b47f804252d1b73a0b8a40f1656><779b7b47f804252d1b73a0b8a40f1656>]
+[<a30a1a6222231a8bfbfcfe4d5aba1993><a30a1a6222231a8bfbfcfe4d5aba1993>]
 % ReportLab generated PDF document -- digest (http://www.reportlab.com)
 
 /Info 6 0 R
@@ -72,5 +72,5 @@ trailer
 /Size 9
 >>
 startxref
-1456
+1454
 %%EOF
